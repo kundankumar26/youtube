@@ -1,17 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { closeSidebar, toggleMenu } from "../utils/appSlice";
+import { closeSidebar } from "../utils/appSlice";
 
 const WatchPage = () => {
   const [params] = useSearchParams();
   const dispatch = useDispatch();
 
-  const dataStore = useSelector(store => store);
-
   const videoId = params.get("v");
   useEffect(() => {
     dispatch(closeSidebar());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
