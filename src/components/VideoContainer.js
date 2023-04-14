@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { YOUTUBE_VIDEOS_API } from "../utils/constant";
-import VideoCard from "./VideoCard";
+import VideoCard, { AdVideoCard } from "./VideoCard";
 import { Link } from "react-router-dom";
+import VideoCardShimmer from "./VideoCardShimmer";
 
 const VideoContainer = () => {
   const [videos, setVideos] = useState([]);
@@ -18,11 +19,16 @@ const VideoContainer = () => {
 
   return (
     <div className="my-5 flex flex-wrap">
-      {videos?.map((video) => (
-        <Link to={"watch?v=" + video.id} key={video.id}>
-          <VideoCard item={video} />
-        </Link>
-      ))}
+      {videos[0] && <AdVideoCard info={videos[0]} />}
+      {videos.length
+        ? videos?.map((video) => (
+            <Link to={"watch?v=" + video.id} key={video.id}>
+              <VideoCard item={video} />
+            </Link>
+          ))
+        : new Array(30)
+            .fill(Math.random() * 100)
+            .map((val) => <VideoCardShimmer key={val} />)}
     </div>
   );
 };

@@ -1,18 +1,34 @@
-import React from 'react'
+import React from "react";
 
-const VideoCard = ({item}) => {
-    const data = item.snippet;
-    const stats = item.statistics;
+const VideoCard = ({ item, isAdCard }) => {
+  const data = item.snippet;
+  const stats = item.statistics;
   return (
-    <div className='m-2 mb-8 rounded-2xl w-80 hover:shadow-lg'>
-        <img className='rounded-2xl' alt='thumbnail' src={data.thumbnails.medium.url}/>
-        <ul className='p-2'>
-            <li className='font-bold text-lg line-clamp-2'>{ data.title }</li>
-            <li className='font-medium mt-2'>{ data.channelTitle }</li>
-            <li>{ stats.viewCount } views</li>
+    <div className="m-2 mb-8 rounded-2xl w-80 transition duration-500 hover:shadow-xl hover:scale-105">
+      <img
+        className="rounded-2xl"
+        alt="thumbnail"
+        src={data?.thumbnails.medium.url}
+      />
+      {item.isAdCard ? (
+        <ul className="p-2">
+          <li className="font-bold text-lg line-clamp-2">{data.title}</li>
+          <li>Ad from youtube</li>
         </ul>
+      ) : (
+        <ul className="p-2">
+          <li className="font-bold text-lg line-clamp-2">{data.title}</li>
+          <li className="font-medium mt-2">{data.channelTitle}</li>
+          <li>{stats.viewCount} views</li>
+        </ul>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default VideoCard
+// THIS IS HIGHER ORDER COMPONENT: it takes a component and returns a component
+export const AdVideoCard = ({ info }) => {
+  return <VideoCard item={{ ...info, isAdCard: true }} />;
+};
+
+export default VideoCard;

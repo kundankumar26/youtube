@@ -1,30 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeSidebar } from "../utils/appSlice";
+import { YOUTUBE_VIDEO_API } from "../utils/constant";
+import ChannelDetails from "./ChannelDetails";
+import CommentsList from "./CommentsList";
 
 const WatchPage = () => {
   const [params] = useSearchParams();
   const dispatch = useDispatch();
+  const [videoDetails, setVideoDetails] = useState({});
 
   const videoId = params.get("v");
+  const getVideoDetails = async () => {
+    const data = await fetch(YOUTUBE_VIDEO_API + videoId);
+    const json = await data.json();
+    // console.log(json)
+    setVideoDetails(json.items[0]);
+  };
   useEffect(() => {
     dispatch(closeSidebar());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    getVideoDetails();
   }, []);
 
-  return (
-    <div className="px-8 py-4">
+  return Object.keys(videoDetails).length > 0 ? (
+    <div className="grid grid-flow-row mx-8 py-4 w-1/2">
       <iframe
-        width="1042"
-        height="586"
+        width="1180"
+        height="660"
         src={"https://www.youtube.com/embed/" + videoId}
-        title="MANGULARA BHAGYA- ମଙ୍ଗୁଳାର ଭାଗ୍ୟ -Mega Serial | Full Episode -433 | Sidharrth TV"
+        title={videoDetails?.snippet?.title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
       ></iframe>
+      <ChannelDetails props={videoDetails} />
+      <CommentsList props={videoId} />
     </div>
-  );
+  ) : null;
 };
 
 export default WatchPage;
