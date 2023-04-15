@@ -6,7 +6,7 @@ const VideoCard = ({ item, isAdCard }) => {
   return (
     <div className="m-2 mb-8 rounded-2xl w-[17rem] transition duration-500 hover:shadow-xl">
       <img
-        className="rounded-2xl h-44 w-full"
+        className="rounded-2xl h-40 w-full"
         alt="thumbnail"
         src={data?.thumbnails.medium.url}
       />
