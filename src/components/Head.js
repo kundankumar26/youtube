@@ -38,7 +38,7 @@ const Head = () => {
   }, [searchQuery]);
 
   return (
-    <div className="grid grid-flow-col h-16 px-6 py-2 shadow-lg">
+    <div className="grid grid-flow-col h-14 px-6 py-2 shadow-lg">
       <div className="col-span-1 flex items-center">
         <img
           onClick={() => handleHamburger()}
@@ -72,15 +72,13 @@ const Head = () => {
             />
           </button>
         </div>
-        {
-          <SuggestionDropdown
-            props={{
-              suggestions: searchQuerySuggestions,
-              showSuggestions: showSuggestions,
-              searchQuery: searchQuery,
-            }}
-          />
-        }
+        <SuggestionDropdown
+          props={{
+            suggestions: searchQuerySuggestions,
+            showSuggestions: showSuggestions,
+            searchQuery: searchQuery,
+          }}
+        />
       </div>
       <div className="col-span-1 justify-self-end">
         <img

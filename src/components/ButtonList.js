@@ -7,7 +7,7 @@ const ButtonList = () => {
     buttonList.push("random");
   }
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap pt-4 bg-white w-full">
       {buttonList.map((e, idx) => (
         <Button key={idx} name={e} />
       ))}

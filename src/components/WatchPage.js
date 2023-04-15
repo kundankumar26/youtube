@@ -26,9 +26,9 @@ const WatchPage = () => {
   return Object.keys(videoDetails).length > 0 ? (
     <div className="grid grid-flow-row mx-8 py-4 w-1/2">
       <iframe
-        width="1180"
-        height="660"
-        src={"https://www.youtube.com/embed/" + videoId}
+        width="1042"
+        height="586"
+        src={"https://www.youtube.com/embed/" + videoId + "?autoplay=1"}
         title={videoDetails?.snippet?.title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen

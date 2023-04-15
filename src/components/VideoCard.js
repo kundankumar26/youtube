@@ -4,9 +4,9 @@ const VideoCard = ({ item, isAdCard }) => {
   const data = item.snippet;
   const stats = item.statistics;
   return (
-    <div className="m-2 mb-8 rounded-2xl w-80 transition duration-500 hover:shadow-xl hover:scale-105">
+    <div className="m-2 mb-8 rounded-2xl w-80 transition duration-500 hover:shadow-xl">
       <img
-        className="rounded-2xl"
+        className="rounded-2xl h-44 w-full"
         alt="thumbnail"
         src={data?.thumbnails.medium.url}
       />
@@ -17,9 +17,9 @@ const VideoCard = ({ item, isAdCard }) => {
         </ul>
       ) : (
         <ul className="p-2">
-          <li className="font-bold text-lg line-clamp-2">{data.title}</li>
-          <li className="font-medium mt-2">{data.channelTitle}</li>
-          <li>{stats.viewCount} views</li>
+          <li className="font-bold text-base line-clamp-2">{data.title}</li>
+          <li className="font-normal text-sm mt-2">{data.channelTitle}</li>
+          <li className="text-sm">{stats.viewCount} views</li>
         </ul>
       )}
     </div>

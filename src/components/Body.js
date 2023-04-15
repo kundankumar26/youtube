@@ -9,7 +9,7 @@ const Body = () => {
       <div className="fixed bg-white w-full top-0">
         <Head />
       </div>
-      <div className="flex mt-[4rem]">
+      <div className="flex mt-[3rem]">
         <Sidebar />
         <Outlet />
       </div>

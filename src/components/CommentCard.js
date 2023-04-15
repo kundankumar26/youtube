@@ -10,27 +10,29 @@ const CommentCard = ({ snippet, id }) => {
   return (
     <div className="flex my-4">
       <div
-        className="bg-gray-300 h-12 w-12 rounded-full overflow-hidden cursor-pointer"
+        className="bg-gray-300 h-10 w-10 rounded-full overflow-hidden cursor-pointer"
         onClick={() => openProfile(commentDetails?.authorChannelUrl)}
       >
         <img
-          className="bg-gray-300 h-12 w-12 rounded-full"
+          className="bg-gray-300 h-10 w-10 rounded-full"
           alt="profile pic"
           src={commentDetails?.authorProfileImageUrl}
         />
       </div>
       <div className="flex flex-col px-5">
         <span
-          className="font-semibold text-base cursor-pointer"
+          className="font-semibold text-sm cursor-pointer"
           onClick={() => openProfile(commentDetails?.authorChannelUrl)}
         >
           {commentDetails?.authorDisplayName}
-          <span className="ml-2 font-normal">{commentDetails?.updatedAt}</span>
+          <span className="ml-2 font-normal text-xs">
+            {commentDetails?.updatedAt}
+          </span>
         </span>
-        <span className="text-base">{commentDetails?.textOriginal}</span>
+        <span className="text-sm">{commentDetails?.textOriginal}</span>
         <div className="mt-2 flex items-center">
           <img className="h-4 w-4 mr-2" alt="like" src={likeicon} />
-          {commentDetails?.likeCount}
+          <span className="text-xs">{commentDetails?.likeCount}</span>
           <img className="h-4 w-4 ml-4" alt="dislike" src={dislikeicon} />
         </div>
       </div>
