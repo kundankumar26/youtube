@@ -46,7 +46,7 @@ const VideoContainer = () => {
           <VideoCard item={video} />
         </Link>
       ))}
-      {loadingMore && new Array(12).fill(0).map((val) => <VideoCardShimmer />)}
+      {loadingMore && new Array(12).fill(0).map((val, idx) => <VideoCardShimmer key={idx}/>)}
     </div>
   );
 };

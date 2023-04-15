@@ -12,8 +12,7 @@ const ListItem = ({ suggestion }) => {
 };
 
 const SuggestionDropdown = ({ props }) => {
-  const suggestions = props.suggestions,
-    setSearchQuery = props.setSearchQuery;
+  const suggestions = props.suggestions;
 
   return (
     <div className="flex justify-center">

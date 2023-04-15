@@ -7,12 +7,12 @@ import { cacheResults } from "../utils/cacheSlice";
 import { useSearchParams } from "react-router-dom";
 
 const Head = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [params] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(params.get('q') ? params.get('q') : "");
   const [searchQueryValue, setSearchQueryValue] = useState("");
   const [searchQuerySuggestions, setsearchQuerySuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const dispatch = useDispatch();
-  const [params] = useSearchParams();
   const ref = useRef(null);
   const searchCache = useSelector((store) => store.cacheSearchQuery.cache);
 
@@ -26,9 +26,6 @@ const Head = () => {
   };
 
   useEffect(() => {
-    if (params.get('q')) {
-      setSearchQueryValue(params.get('q'));
-    }
     const timer = setTimeout(() => {
       if (searchCache[searchQuery]) {
         setsearchQuerySuggestions(searchCache[searchQuery]);
@@ -74,10 +71,9 @@ const Head = () => {
           <input
             className="w-[38%] px-4 border rounded-l-full outline-none"
             type="text"
-            value={searchQueryValue || searchQuery}
+            value={searchQuery}
             placeholder="search"
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setSearchQuery(searchQueryValue)}
+            onChange={(e) => setSearchQuery(!!e.target.value.length ? e.target.value : searchQuery)}
             ref={ref}
           />
           <button className="font-semibold border rounded-r-full bg-gray-100">
@@ -92,8 +88,7 @@ const Head = () => {
           <SuggestionDropdown
             props={{
               suggestions: searchQuerySuggestions,
-              showSuggestions: showSuggestions,
-              setSearchQuery: setSearchQuery,
+              showSuggestions: showSuggestions
             }}
           />
         )}
