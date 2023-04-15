@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { GOOGLE_SEARCH_API } from "../utils/constant";
 import SuggestionDropdown from "./SuggestionDropdown";
 import { cacheResults } from "../utils/cacheSlice";
-import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchQueryValue, setSearchQueryValue] = useState("");
   const [searchQuerySuggestions, setsearchQuerySuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const dispatch = useDispatch();
+  const [params] = useSearchParams();
+  const ref = useRef(null);
   const searchCache = useSelector((store) => store.cacheSearchQuery.cache);
 
   const handleHamburger = () => {
@@ -23,6 +26,9 @@ const Head = () => {
   };
 
   useEffect(() => {
+    if (params.get('q')) {
+      setSearchQueryValue(params.get('q'));
+    }
     const timer = setTimeout(() => {
       if (searchCache[searchQuery]) {
         setsearchQuerySuggestions(searchCache[searchQuery]);
@@ -30,9 +36,18 @@ const Head = () => {
         getSuggestions();
         dispatch(cacheResults({ [searchQuery]: searchQuerySuggestions }));
       }
-    }, 100);
+    }, 200);
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setShowSuggestions(false);
+      } else {
+        setShowSuggestions(true);
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
     return () => {
       clearTimeout(timer);
+      document.removeEventListener('click', handleClickOutside, true);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
@@ -41,14 +56,14 @@ const Head = () => {
     <div className="grid grid-flow-col h-14 px-6 py-2 shadow-lg">
       <div className="col-span-1 flex items-center">
         <img
-          onClick={() => handleHamburger()}
+          onClick={handleHamburger}
           className="h-6 cursor-pointer"
           alt="hamburger"
-          src="https://static.thenounproject.com/png/3401904-200.png"
+          src="https://www.svgrepo.com/show/313139/hamburger-menu.svg"
         />
         <a href="/">
           <img
-            className="h-6 pl-8"
+            className="h-5 pl-6"
             alt="logo"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
           />
@@ -57,12 +72,13 @@ const Head = () => {
       <div className="col-span-10">
         <div className="flex justify-center h-full">
           <input
-            className="w-1/3 px-4 border rounded-l-full outline-none"
+            className="w-[38%] px-4 border rounded-l-full outline-none"
             type="text"
+            value={searchQueryValue || searchQuery}
             placeholder="search"
             onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setShowSuggestions(false)}
+            onFocus={() => setSearchQuery(searchQueryValue)}
+            ref={ref}
           />
           <button className="font-semibold border rounded-r-full bg-gray-100">
             <img
@@ -72,13 +88,15 @@ const Head = () => {
             />
           </button>
         </div>
-        <SuggestionDropdown
-          props={{
-            suggestions: searchQuerySuggestions,
-            showSuggestions: showSuggestions,
-            searchQuery: searchQuery,
-          }}
-        />
+        {showSuggestions && !!searchQuerySuggestions.length && (
+          <SuggestionDropdown
+            props={{
+              suggestions: searchQuerySuggestions,
+              showSuggestions: showSuggestions,
+              setSearchQuery: setSearchQuery,
+            }}
+          />
+        )}
       </div>
       <div className="col-span-1 justify-self-end">
         <img

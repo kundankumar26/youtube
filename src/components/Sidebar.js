@@ -1,32 +1,73 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+
+const SidebarItem = ({ title, activeItem, setActiveItem }) => {
+  return (
+    <li
+      className={`p-2 rounded-md w-full cursor-pointer hover:bg-gray-200  ${
+        title === activeItem ? "bg-gray-200 font-semibold" : ""
+      }`}
+      onClick={() => setActiveItem(title)}
+    >
+      {title}
+    </li>
+  );
+};
 
 const Sidebar = () => {
-  const isMenuOpened = useSelector((store) => store.app.isMenuOpened);
-
-  if (!isMenuOpened) return null;
-
+  const items = ["Home", "Shorts", "Music", "Gaming", "Movies"];
+  const secondList = [
+    "Libraries",
+    "History",
+    "Your videos",
+    "Watch later",
+    "Downloads",
+    "Liked videos",
+  ];
+  const thirdList = [
+    "Trending",
+    "Shopping",
+    "Music songs",
+    "Movies & shows",
+    "Live",
+    "News",
+    "Sports",
+    "Learning",
+    "Fashion",
+  ];
+  const [activeItem, setActiveItem] = useState("Home");
   return (
-    <div className="border font-normal px-4 py-6 w-1/12 shadow-lg">
-      <ul>
-        <li>Home</li>
-        <li>Shorts</li>
-        <li>Videos</li>
-        <li>Live</li>
+    <div className="w-[14%] border bg-white px-4 py-2 shadow-lg text-gray-700 fixed h-full overflow-scroll scrollbar">
+      <ul className="mb-2">
+        {items.map((e) => (
+          <SidebarItem
+            key={e}
+            title={e}
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
+          />
+        ))}
       </ul>
-      <h1 className="mt-4 font-bold">Subscriptions</h1>
-      <ul>
-        <li>Music</li>
-        <li>Sports</li>
-        <li>Gaming</li>
-        <li>Movies</li>
+      <h1 className="pt-3 font-medium border-t-2">Subscriptions</h1>
+      <ul className="mb-2">
+        {secondList.map((e) => (
+          <SidebarItem
+            key={e}
+            title={e}
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
+          />
+        ))}
       </ul>
-      <h1 className="mt-4 font-bold">Watch later</h1>
+      <h1 className="mt-4 font-medium">Watch later</h1>
       <ul>
-        <li>Music</li>
-        <li>Sports</li>
-        <li>Gaming</li>
-        <li>Movies</li>
+        {thirdList.map((e) => (
+          <SidebarItem
+            key={e}
+            title={e}
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
+          />
+        ))}
       </ul>
     </div>
   );

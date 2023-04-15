@@ -1,11 +1,11 @@
 import React from "react";
-import ButtonList from "./ButtonList";
+import ChipList from "./ChipList";
 import VideoContainer from "./VideoContainer";
 
 const MainContainer = () => {
   return (
     <div className="p-2">
-      <ButtonList />
+      <ChipList />
       <VideoContainer />
     </div>
   );

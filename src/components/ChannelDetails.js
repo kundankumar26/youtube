@@ -11,7 +11,6 @@ const ChannelDetails = ({ props }) => {
   const getChannelDetails = async () => {
     const data = await fetch(YOUTUBE_CHANNEL_API + videoDetails?.channelId);
     const json = await data.json();
-    // console.log(json);
     setChannelDetails(json?.items[0]);
   };
   useEffect(() => {
@@ -19,9 +18,9 @@ const ChannelDetails = ({ props }) => {
   }, []);
   return Object.keys(videoDetails).length ? (
     <>
-      <div className="font-medium text-xl mt-4">{videoDetails.title}</div>
-      <div className="my-4 flex justify-between pb-6">
-        <div className="grid grid-flow-col">
+      <div className="font-medium text-xl mt-3">{videoDetails.title}</div>
+      <div className="my-4 flex justify-between mb-10">
+        <div className="h-10 grid grid-flow-col items-center">
           <div className="bg-gray-200 h-10 w-10 rounded-full overflow-hidden cursor-pointer">
             <img
               className="h-10 w-10 rounded-full overflow-hidden"
@@ -41,7 +40,7 @@ const ChannelDetails = ({ props }) => {
             Subscribe
           </div>
         </div>
-        <div className="grid grid-flow-col float-right text-gray-800 cursor-pointer">
+        <div className="grid grid-flow-col h-10 float-right text-gray-800 cursor-pointer">
           <div className="bg-gray-100 rounded-3xl flex mr-3 py-[0.4rem] self-center px-2 font-medium">
             <span className="border-r border-gray-300 px-3 flex self-center text-[0.97rem]">
               <img className="h-5 w-5 self-center" alt="like" src={likeicon} />
@@ -53,7 +52,7 @@ const ChannelDetails = ({ props }) => {
               src={dislikeicon}
             />
           </div>
-          <div className="bg-gray-200 rounded-3xl text-[0.97rem] py-[0.4rem] self-center px-4 font-medium flex">
+          <div className="bg-gray-100 rounded-3xl text-[0.97rem] py-[0.4rem] self-center px-4 font-medium flex">
             <img className="h-5 mr-2" alt="share" src={shareicon} />
             Share
           </div>

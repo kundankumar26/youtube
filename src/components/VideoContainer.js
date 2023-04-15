@@ -27,11 +27,15 @@ const VideoContainer = () => {
   };
 
   useEffect(() => {
+    dispatch(openSidebar());
+
+  }, []);
+
+  useEffect(() => {
     if (videos.length === 0 || (isBottomReached && nextPageToken)) {
       setIsBottomReached(false);
       getVideos();
     }
-    dispatch(openSidebar());
   }, [isBottomReached]);
 
   return (
@@ -42,7 +46,7 @@ const VideoContainer = () => {
           <VideoCard item={video} />
         </Link>
       ))}
-      {loadingMore && new Array(30).fill(0).map((val) => <VideoCardShimmer />)}
+      {loadingMore && new Array(12).fill(0).map((val) => <VideoCardShimmer />)}
     </div>
   );
 };

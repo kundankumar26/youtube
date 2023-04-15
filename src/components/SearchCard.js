@@ -1,15 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const SearchCard = ({ snippet, id }) => {
   return (
     <div className="m-8 flex">
-      <div className="overflow-hidden bg-gray-100 h-52 w-[28%] rounded-2xl border flex items-center">
-        <img
-          className=""
-          alt="search img"
-          src={snippet?.thumbnails?.high?.url}
-        />
+      <div className="overflow-hidden bg-gray-100 h-52 w-[25%] rounded-2xl border flex items-center">
+        <img alt="search img" src={snippet?.thumbnails?.high?.url} />
       </div>
       <div className="flex flex-col ml-4 mt-2">
         <span className="font-normal text-xl">{snippet?.title}</span>

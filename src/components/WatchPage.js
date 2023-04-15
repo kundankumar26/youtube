@@ -24,7 +24,7 @@ const WatchPage = () => {
   }, []);
 
   return Object.keys(videoDetails).length > 0 ? (
-    <div className="grid grid-flow-row mx-8 py-4 w-1/2">
+    <div className="grid grid-flow-row mx-8 pt-6 w-1/2">
       <iframe
         width="1042"
         height="586"
