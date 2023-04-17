@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+## Getting Started with Create React App
 
 This project is clone of youtube and built using the public APIs of youtube.
 

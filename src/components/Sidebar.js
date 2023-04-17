@@ -36,7 +36,7 @@ const Sidebar = () => {
   ];
   const [activeItem, setActiveItem] = useState("Home");
   return (
-    <div className="w-[14%] border bg-white px-4 py-2 shadow-lg text-gray-700 fixed h-full overflow-scroll scrollbar">
+    <div className="w-[14%] max-sm:w-[100%] border bg-white px-4 py-2 shadow-lg text-gray-700 fixed h-full overflow-scroll scrollbar">
       <ul className="mb-2">
         {items.map((e) => (
           <SidebarItem

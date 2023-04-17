@@ -60,13 +60,13 @@ const Head = () => {
         />
         <a href="/">
           <img
-            className="h-5 pl-6"
+            className="h-5 pl-6 max-w-sm"
             alt="logo"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/YouTube_Logo_2017.svg/2560px-YouTube_Logo_2017.svg.png"
           />
         </a>
       </div>
-      <div className="col-span-10">
+      <div className="col-span-10 max-sm:float-right">
         <div className="flex justify-center h-full">
           <input
             className="w-[38%] px-4 border rounded-l-full outline-none"
@@ -93,7 +93,7 @@ const Head = () => {
           />
         )}
       </div>
-      <div className="col-span-1 justify-self-end">
+      <div className="col-span-1 justify-self-end max-sm:hidden">
         <img
           className="h-10 items-center"
           alt="profile"
